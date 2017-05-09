@@ -4,14 +4,10 @@ var express = require('express');
 var router = express.Router();
 var usersController = require('../controllers/users.controller');
 
-// // 该路由使用的中间件
-// router.use(function timeLog(req, res, next) {
-//   console.log('Time: ', Date.now());
-//   next();
-// });
-// 定义
+// 定义获取user列表
 router.get('/users',usersController.list);
-// 定义
+
+// 定义验证登录
 router.post('/users/login',usersController.verifyUser);
 
 module.exports = router;

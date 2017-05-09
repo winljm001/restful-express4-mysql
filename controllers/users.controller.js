@@ -1,10 +1,4 @@
 'use strict';
-
-/**
- * Module dependencies.
- */
-var userModel = require('../models/user.model.js');
-
 /**
  * List of users
  */
@@ -29,13 +23,14 @@ exports.list = function(req, res) {
  */
 exports.verifyUser = function(req, res) {
     var data = {};
-    data['id']=req.body.id;
+    data['account']=req.body.account;
     data['password']=req.body.password;
     req.getConnection(function(err, conn) {
         if (err) {
             return next(err);
         } else {
-            conn.query('select * from users where ?', data, function(err,result) {
+            console.log(data);
+            conn.query('select * from users where account=? and password=?',[data['account'],data['password']], function(err,result) {
                 if (err) {
                     return next(err);
                 } else {
